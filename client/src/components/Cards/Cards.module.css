@@ -1,0 +1,29 @@
+.contenedorTotal{
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contenedorTarjeta {
+justify-content: center;
+padding: 20px;
+
+} 
+
+.link{
+  color: white;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  font-family: 'Roboto Condensed', sans-serif;;
+}
+
+.noCoincidences{
+  height: 100vh;
+  width: 100%;
+}
+
+.gif {
+  height: 50%;
+  width: 30%;
+}

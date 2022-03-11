@@ -1,0 +1,73 @@
+.cuerpoTarjeta {
+  background-color: #030307e8;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 550px;
+  width: 500px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 3%;
+  justify-content: center;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.cuerpoTarjeta p {
+  color: rgb(232, 241, 232);
+  font-size: 1.5rem;
+}
+
+.cuerpoTarjeta h3 {
+  color: rgb(232, 241, 232);
+}
+
+.cuerpoTarjeta:hover {
+  /* justify-content: center; */
+  background-color: #030307e8;
+  height: 565px;
+  width: 515px;
+  transition: all ease .4s;
+  transition-delay: .1s;
+}
+/* .cuerpoTarjeta:hover p {
+  align-items: center;
+  padding-top: 1rem;
+} */
+
+.link {
+  color: white;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.imagen {
+  height: 50%;
+  width: 100%;
+}
+
+.contenedorVerMas {
+  margin-top: -3.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.verMas {
+  font-size: 0.5rem;
+  border-radius: 7px;
+  width: 14rem;
+  height: 1.5rem;
+  zoom: 1;
+  filter: alpha(opacity=0); /*Opacidad */
+  opacity: 0; /*Inicialmente transparente */
+  padding: 5px;
+  color: rgb(0, 0, 0);
+  background: rgba(194, 194, 194, 0.753);
+  transition: all ease .15s;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.cuerpoTarjeta:hover .verMas {
+  filter: alpha(opacity=60);
+  opacity: .4;
+  margin-top: 40px;
+}
