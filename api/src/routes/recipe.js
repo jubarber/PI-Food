@@ -47,7 +47,7 @@ router.get("/", async (req, res, next) => {
             healthScore: e.healthScore,
             dishTypes: e.dishTypes,
             steps: e.analyzedInstructions.map((el) =>
-              el.steps.map((d) => `step ${d.number}: ${d.step}`)
+              el.steps.map((d) => d.step)
             ),
             diets: e.diets
               .map((elem) => elem.charAt(0).toUpperCase() + elem.slice(1))

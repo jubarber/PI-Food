@@ -5,6 +5,8 @@ import { getRecipes } from "../../redux/actions/actions.js";
 import estilos from "./Cards.module.css";
 import { RecipeCard } from "../RecipeCard/RecipeCard.jsx";
 import { Loading } from "../Loading/Loading"
+import gif from "./img/gifNotFound.gif";
+
 
 export const Cards = () => {
   const dispatch = useDispatch();
@@ -37,7 +39,7 @@ export const Cards = () => {
       {loading ? (
        <Loading />
       ) : 
-      currentItems &&
+      currentItems ?
         currentItems.map((e) => {
           return (
             <div>
@@ -58,7 +60,13 @@ export const Cards = () => {
               </div>
             </div>
           );
-        })}
+        })
+        : (
+          <div className={estilos.noCoincidences}>
+            <p>No coincidences found :( </p>
+            <img className={estilos.gif} src={gif} alt="recipe not found" />
+          </div>
+        )}
     </div>
   );
 };

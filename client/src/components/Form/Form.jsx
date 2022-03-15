@@ -13,11 +13,11 @@ export function validate(input) {
   if (!input.summary) {
     error.summary = "Please, enter recipe summary";
   }
-  if (!input.score) {
-    error.score = "Please, enter recipe score";
+  if (!input.spoonacularScore) {
+    error.spoonacularScore = "Please, enter recipe score";
   }
-  if (input.score < 0 || input.score > 100) {
-    error.score = "Please, enter a valid score. (Must be between 0 and 100)";
+  if (input.spoonacularScore < 0 || input.spoonacularScore > 100) {
+    error.spoonacularScore = "Please, enter a valid score. (Must be between 0 and 100)";
   }
   if (!input.healthScore) {
     error.healthScore = "Please, enter recipe health score";
@@ -40,7 +40,7 @@ export default function Form() {
   const [input, setInput] = useState({
     title: "",
     summary: "",
-    score: "",
+    spoonacularScore: "",
     healthScore: "",
     steps: "",
     diets: []
@@ -53,10 +53,10 @@ export default function Form() {
   const [dietas, setDietas] = useState([])
   const handleSelectDiets = (e) => {
     e.preventDefault();
-    dietsState?.map(d => d.id === parseInt(e.target.value) && setDietas([...dietas, d.name]))
     if (input.diets.includes(parseInt(e.target.value))) {
       alert("Diet's already been selected");
     } else {
+      dietsState?.map(d => d.id === parseInt(e.target.value) && setDietas([...dietas, d.name]))
       setInput({ ...input, diets: [...input.diets, parseInt(e.target.value)] });
     }
   };
@@ -70,7 +70,7 @@ export default function Form() {
       setInput({
         title: "",
         summary: "",
-        score: "",
+        spoonacularScore: "",
         healthScore: "",
         steps: "",
         diets: []
@@ -102,7 +102,7 @@ export default function Form() {
       ...input,
       diets: dietsFiltered
     });
-    setDietas([dietsFiltered])
+    setDietas(dietsFiltered)
   }
 
   return (
@@ -146,8 +146,8 @@ export default function Form() {
                 className={estilos.input}
                 placeholder="Recipe score"
                 type="number"
-                name="score"
-                value={input.score}
+                name="spoonacularScore"
+                value={input.spoonacularScore}
                 onChange={handleChange}
               />
               <input
@@ -160,7 +160,7 @@ export default function Form() {
               />
             </div>
 
-            {errors.score && <p className={estilos.danger}>{errors.score}</p>}
+            {errors.spoonacularScore && <p className={estilos.danger}>{errors.spoonacularScore}</p>}
             {errors.healthScore && (
               <p className={estilos.danger}>{errors.healthScore}</p>
             )}
@@ -178,7 +178,7 @@ export default function Form() {
               onChange={(e) => handleSelectDiets(e)}
             >
               <option label={"Select diet"} disabled selected></option>
-              {dietsState?.map((diet) => {
+              {dietsState && typeof(dietsState[0]) !== "array"?dietsState.map((diet) => {
                 return (
                   <option
                     key={diet.id}
@@ -188,7 +188,7 @@ export default function Form() {
                     {diet.name}
                   </option>
                 );
-              })}
+              }): false}
             </select>
 
             <div className={estilos.inputGroup}>
