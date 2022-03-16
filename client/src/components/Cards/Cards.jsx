@@ -39,7 +39,7 @@ export const Cards = () => {
       {loading ? (
        <Loading />
       ) : 
-      currentItems ?
+      currentItems[0] ?
         currentItems.map((e) => {
           return (
             <div>
@@ -63,7 +63,7 @@ export const Cards = () => {
         })
         : (
           <div className={estilos.noCoincidences}>
-            <p>No coincidences found :( </p>
+            <p className={estilos.p}>No coincidences found :( </p>
             <img className={estilos.gif} src={gif} alt="recipe not found" />
           </div>
         )}

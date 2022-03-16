@@ -22,6 +22,11 @@ padding: 20px;
   height: 100vh;
   width: 100%;
 }
+.p{
+  font-size: 1.5rem;
+  color: white; 
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
 .gif {
   height: 50%;

@@ -49,23 +49,35 @@ export default function Form() {
   useEffect(() => {
     dispatch(getDiets());
   }, [dispatch]);
+
   
   const [dietas, setDietas] = useState([])
   const handleSelectDiets = (e) => {
+    // console.log(e.target)
     e.preventDefault();
-    if (input.diets.includes(parseInt(e.target.value))) {
+    if (input.diets?.includes(parseInt(e.target.value))) {
       alert("Diet's already been selected");
     } else {
-      dietsState?.map(d => d.id === parseInt(e.target.value) && setDietas([...dietas, d.name]))
+      dietsState?.map(d => d.id === parseInt(e.target.value) && setDietas([...dietas, d]))
       setInput({ ...input, diets: [...input.diets, parseInt(e.target.value)] });
     }
   };
   
   const [errors, setErrors] = useState({});
+  
+  // useEffect(() => {
+  //   console.log(Object.values(input))
+  // })
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (Object.keys(errors).length === 0) {
+    if (!input.title){
+      e.preventDefault();
+      alert("Empty form, please complete");
+    } else if (Object.keys(errors).length !== 0){
+      e.preventDefault();
+      alert("Please complete all the fields");
+    } else if (Object.keys(errors).length === 0) {
       dispatch(createRecipe(input));
       setInput({
         title: "",
@@ -76,12 +88,10 @@ export default function Form() {
         diets: []
       });
       window.location.href = "/home";
-    } else {
-      e.preventDefault();
-      alert("Please complete all the fields");
-    }
-  };
-
+    };
+  }
+    
+    
   const handleChange = (e) => {
     setInput({
       ...input,
@@ -96,11 +106,13 @@ export default function Form() {
   };
 
   function handleDelete(e) {
+    let dietsFiltered = dietas?.filter((el) => el.name !== e.name);
     console.log(e)
-    let dietsFiltered = dietas.filter((el) => el !== e);
+    console.log(dietsFiltered) 
+
     setInput({
       ...input,
-      diets: dietsFiltered
+      diets: dietsFiltered?.map(e => e.id)
     });
     setDietas(dietsFiltered)
   }
@@ -115,7 +127,7 @@ export default function Form() {
       <div className={estilos.form}>
         <div className={estilos.title}>Welcome!</div>
         <div className={estilos.subtitle}>Let's create your own recipe!</div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={estilos.inputContainer}>
             <input
               className={estilos.input}
@@ -195,17 +207,17 @@ export default function Form() {
               {dietas?.map((d) => {
                 return (
                   <div
-                    key={d}
+                    key={d.id}
                     className={estilos.inputTemp}
                     onClick={() => handleDelete(d)}
                   >
-                    {d}
+                    {d.name}
                     <p className={estilos.texto}> Click to delete</p>
                   </div>
                 );
               })}
             </div>
-            <button className={estilos.button} onClick={handleSubmit}>
+            <button className={estilos.button} >
               Create
             </button>
           </div>

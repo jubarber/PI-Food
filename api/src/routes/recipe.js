@@ -34,7 +34,7 @@ router.get("/", async (req, res, next) => {
       // console.log("SOY DB PROMISE RECIPE", dbPromiseRecipe);
 
       const apiUrl = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${api_key}&number=10&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${name}&apiKey=${api_key}&number=100&addRecipeInformation=true`
       );
       // console.log('soy apiurl', apiUrl.data);
       if (apiUrl) {
@@ -64,7 +64,7 @@ router.get("/", async (req, res, next) => {
     } else {
       //SI NO ME PASAN NOMBRE X QUERY TRAIGO TODO DE MI BD Y DE LA API
       const apiUrl = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${api_key}&number=10&addRecipeInformation=true`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${api_key}&number=100&addRecipeInformation=true`
       );
       var apiPromiseRecipe = apiUrl.data.results.map((e) => {
         return {
@@ -128,7 +128,7 @@ router.get("/:recipeId", async (req, res, next) => {
     } else {
       //si el id no contiene - , busco en la api
       const recipeApi = await axios.get(
-        `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${api_key}&number=10`
+        `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${api_key}&number=100`
       );
       // console.log("SOY RECIPE API", recipeApi)
 
